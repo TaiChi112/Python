@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Products list</h1>
-    <ul>
-        {% for product in product_list %}
-            <li>ID: {{ product.id }}, Name: {{ product.name }}, Price: {{ product.price }}</li>
-        {% endfor %}
-    </ul>
-   <h2>End</h2>
+{% extends 'general_app/base.html' %}
 
+{% block title %}Products{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<h1>Products list</h1>
+<ul>
+    {% for product in product_list %}
+    <a href="{{ product.id }}">
+        <li>ID: {{ product.id }}, Name: {{ product.name }},Price ${{ product.price }}</li>
+    </a>
+    {% endfor %}
+</ul>
+<h2>End</h2>
+{% endblock %}
