@@ -1,33 +1,44 @@
 from django import forms
-from .models import CustomUser
+from .models import CustomUser, SingUpIUser, SignInIUser
 from django.contrib.auth.forms import UserCreationForm
 
-class RegistrationForm(UserCreationForm):
+# class RegistrationForm(UserCreationForm):
+#     class Meta:
+#         model = CustomUser
+#         fields = ['username', 'email', 'password1', 'password2']
+from django import forms
+from .models import CustomUser
 
-    # class Meta(UserCreationForm.Meta):
-    #     fields = UserCreationForm.Meta.fields + ('email',)
+class RegistrationForm(forms.ModelForm):
+    password2 = forms.CharField(widget=forms.PasswordInput, label="Confirm Password")
 
     class Meta:
         model = CustomUser
         fields = ['username', 'email', 'password']
 
-    # def clean(self):
-    #     cleaned_data = super().clean()
-    #     password = cleaned_data.get("password")
-    #     confirm_password = cleaned_data.get("confirm_password")
-    #     email = cleaned_data.get("email")
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        password2 = cleaned_data.get("password2")
 
-    #     if password != confirm_password:
-    #         raise forms.ValidationError("Passwords do not match.")
+        if password != password2:
+            raise forms.ValidationError("Passwords do not match.")
 
-    #     existing_user = CustomUser.objects.filter(email=email).first()
-    #     if existing_user:
-    #         self.existing_user = existing_user
-    #         raise forms.ValidationError("This email is already registered.")
-
-    #     return cleaned_data
+        return cleaned_data
 
 
 class LoginForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+    # password = forms.CharField(widget=forms.PasswordInput)
+class SignUpForm(forms.ModelForm):
+    class Meta:
+        model = SingUpIUser
+        fields = ['username', 'email', 'password']
+
+class SignInIUser(forms.ModelForm):
+    class Meta:
+        model = SignInIUser
+        fields = ['email', 'password']
+    
