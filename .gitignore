@@ -1,3 +1,4 @@
+/node_modules
 # Python
 *.py[cod]
 __pycache__/
