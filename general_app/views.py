@@ -9,4 +9,7 @@ def about(request):
     return render(request, 'pages/about.html')
 
 def sign_in(request):
-    return render(request, 'pages/sign_in.html')
+    return render(request, 'account/sign_in.html')
+
+def sign_up(request):
+    return render(request, 'account/sign_up.html')
