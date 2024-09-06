@@ -7,3 +7,6 @@ def index(request):
     
 def about(request):
     return render(request, 'pages/about.html')
+
+def sign_in(request):
+    return render(request, 'pages/sign_in.html')
