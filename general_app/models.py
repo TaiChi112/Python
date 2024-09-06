@@ -1,4 +1,3 @@
-# models.py
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
@@ -33,7 +32,8 @@ class CustomUser(AbstractBaseUser):
     username = models.CharField(max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-
+    last_login = models.DateTimeField(auto_now=True)
+    
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
@@ -51,3 +51,6 @@ class CustomUser(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+    class Meta:
+        db_table = 'custom_user'  # Make sure this matches the table name you expect
