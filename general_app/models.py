@@ -1,3 +1,4 @@
+# models.py
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
@@ -30,10 +31,11 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True)
     username = models.CharField(max_length=255, unique=True)
+    password = models.CharField(max_length=128)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    last_login = models.DateTimeField(auto_now=True)
-    
+    last_login = models.DateTimeField(null=True, blank=True)
+
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
@@ -53,4 +55,4 @@ class CustomUser(AbstractBaseUser):
         return self.is_admin
 
     class Meta:
-        db_table = 'custom_user'  # Make sure this matches the table name you expect
+        db_table = 'custom_user'
