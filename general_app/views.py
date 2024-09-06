@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import CustomUser
 from .forms import SignUpForm, SignInForm
 from django.contrib.auth import authenticate, login
