@@ -24,7 +24,10 @@
                         </h3>
                         <p class="mt-1 text-sm text-gray-500">{{ product.name}}</p>
                     </div>
-                    <p class="text-sm font-medium text-gray-900">${{ product.price }}</p>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">${{ product.price }}</p>
+                        <a href="{% url 'add_to_cart' product.id %}">add</a>
+                    </div>
                 </div>
             </div>
             {% endfor %}
