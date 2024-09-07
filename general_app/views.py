@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import CustomUser
 from .forms import SignUpForm, SignInForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -46,3 +46,10 @@ def sign_in(request):
     context = {
         'sign_in': form}
     return render(request, 'account/sign_in.html',context)
+
+def sign_out(request):
+    logout(request)
+    return redirect('index')
+
+def profile(request):
+    return render(request, 'account/profile.html')
