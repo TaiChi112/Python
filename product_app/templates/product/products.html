@@ -22,10 +22,10 @@
                         <p class="text-sm font-medium text-gray-900">${{ product.price }}</p>
                     </div>
                     <div>
-                        <button
-                            class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-                            <a href="{% url 'add_to_cart' product.id %}">add</a>
-                        </button>
+                        <button style="border-radius: 5px;margin-left:16px ;background: rgb(255, 75, 75);"
+                        class="flex ml-auto text-white border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">
+                        <a href="{% url 'add_to_cart' id=product.id %}">add</a>
+                    </button>
                     </div>
                 </div>
             </div>
