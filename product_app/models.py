@@ -28,8 +28,6 @@ class CartItem(models.Model):
 
     def get_total_price(self):
         return self.quantity * self.product.price
-    
-    # def get_total_price_pices(self):
-    #     return self.quantity
+        
     class Meta:
         db_table = 'cart_item'
