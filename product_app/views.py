@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect
 from .mock import product_mock
 from .models import Product, Cart, CartItem
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
 
+@login_required(login_url='sign_in')
 def products_view(request):
     try:
         products = Product.objects.all()
@@ -29,11 +32,10 @@ def product_view(request, id):
 
 def cart_view(request):
      if request.user.is_authenticated:
-        # ถ้า user มี cart แล้ว ให้ดึงมาใช้ แต่ถ้าไม่มีให้สร้างใหม่
         cart, created = Cart.objects.get_or_create(user=request.user)
         cart_items = CartItem.objects.filter(cart=cart)
      else:
-        cart_items = []  # กรณีที่ผู้ใช้ยังไม่ล็อกอิน
+        cart_items = []
 
      total_price = sum(item.get_total_price() for item in cart_items)
 
@@ -55,4 +57,27 @@ def add_to_cart(request, id):
         cart_item.quantity += 1
     cart_item.save()
 
+    return redirect(request.META.get('HTTP_REFERER', 'index'))
+ 
+
+def remove_from_cart(request, id):
+    # ดึงข้อมูลสินค้า
+    product = get_object_or_404(Product, id=id)
+
+    # ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
+    if request.user.is_authenticated:
+        cart = get_object_or_404(Cart, user=request.user)
+    
+    # ค้นหา CartItem ที่ตรงกับสินค้านั้นๆ
+    cart_item = get_object_or_404(CartItem, cart=cart, product=product)
+
+    # ถ้าจำนวนสินค้ามากกว่า 1 ให้ลดจำนวน
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        # ถ้าจำนวนสินค้าเหลือน้อยกว่าหรือเท่ากับ 0 ให้ลบออกจากตะกร้า
+        cart_item.delete()
+
+    # redirect กลับไปยังหน้าแสดงตะกร้า
     return redirect('cart')
