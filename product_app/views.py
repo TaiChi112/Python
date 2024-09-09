@@ -4,20 +4,24 @@ from .models import Product, Cart, CartItem
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-
+from .forms import ProductSearchForm
 
 # Create your views here.
 
 @login_required(login_url='sign_in')
 def products_view(request):
-    try:
+    form = ProductSearchForm(request.GET)
+
+    if form.is_valid():
+        query = form.cleaned_data.get('query', '')
+        products = Product.objects.filter(name__icontains=query)
+    else:
         products = Product.objects.all()
-    except Exception as e:
-        products = product_mock
     
     context = {
-        'products': products
-    }
+        'products': products,
+        'form': form  # ส่งฟอร์มค้นหาผ่าน context
+}
     return render(request, 'product/products.html', context)
 
 def product_view(request, id):
@@ -32,8 +36,10 @@ def product_view(request, id):
 
 def cart_view(request):
      if request.user.is_authenticated:
+
         cart, created = Cart.objects.get_or_create(user=request.user)
         cart_items = CartItem.objects.filter(cart=cart)
+        
      else:
         cart_items = []
 
@@ -53,31 +59,28 @@ def add_to_cart(request, id):
     
     cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
 
-    if not created:
+    if created == False:
         cart_item.quantity += 1
+
     cart_item.save()
 
-    return redirect(request.META.get('HTTP_REFERER', 'index'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
  
 
 def remove_from_cart(request, id):
-    # ดึงข้อมูลสินค้า
     product = get_object_or_404(Product, id=id)
 
-    # ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
     if request.user.is_authenticated:
         cart = get_object_or_404(Cart, user=request.user)
     
-    # ค้นหา CartItem ที่ตรงกับสินค้านั้นๆ
     cart_item = get_object_or_404(CartItem, cart=cart, product=product)
 
-    # ถ้าจำนวนสินค้ามากกว่า 1 ให้ลดจำนวน
     if cart_item.quantity > 1:
         cart_item.quantity -= 1
         cart_item.save()
     else:
-        # ถ้าจำนวนสินค้าเหลือน้อยกว่าหรือเท่ากับ 0 ให้ลบออกจากตะกร้า
         cart_item.delete()
 
-    # redirect กลับไปยังหน้าแสดงตะกร้า
-    return redirect('cart')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+ 
