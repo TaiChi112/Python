@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, username, password=None):
+    def create_user(self, email, username, password=None):# checking email and username is sending?
         if not email:
             raise ValueError('Users must have an email address')
         if not username:
@@ -14,8 +14,8 @@ class CustomUserManager(BaseUserManager):
             username=username,
         )
 
-        user.set_password(password)
-        user.save(using=self._db)
+        user.set_password(password)# hash password 
+        user.save(using=self._db)# save user in DB
         return user
 
     def create_superuser(self, email, username, password):
@@ -38,20 +38,20 @@ class CustomUser(AbstractBaseUser):
 
     objects = CustomUserManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'email' #auth instance username
+    REQUIRED_FIELDS = ['username'] # strict
 
     def __str__(self):
         return self.email
 
-    def has_perm(self, perm, obj=None):
+    def has_perm(self, perm, obj=None):#check permission access anything in app
         return True
 
-    def has_module_perms(self, app_label):
+    def has_module_perms(self, app_label):# check permission access module
         return True
 
     @property
-    def is_staff(self):
+    def is_staff(self):# checking user is admin
         return self.is_admin
 
     class Meta:
