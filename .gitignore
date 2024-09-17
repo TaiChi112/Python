@@ -1,7 +1,12 @@
+<<<<<<< HEAD
+=======
+/node_modules
+>>>>>>> origin/master
 # Python
 *.py[cod]
 __pycache__/
 *.so
+<<<<<<< HEAD
 *.egg
 *.egg-info/
 dist/
@@ -97,11 +102,16 @@ cover/
 *.pot
 
 # Django stuff:
+=======
+
+# Django
+>>>>>>> origin/master
 *.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
+<<<<<<< HEAD
 # Flask stuff:
 instance/
 .webassets-cache
@@ -138,3 +148,45 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+=======
+# Static files
+staticfiles/
+
+# Media files
+media/
+
+# Virtual environment
+venv/
+env/
+.env
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.bak
+*.tmp
+*.temp
+
+# Compiled Python files
+*.pyc
+
+# Django migration files (optional, depending on your workflow)
+# */migrations/*.py
+# !*/migrations/__init__.py
+
+# Secret key
+*.secret
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+>>>>>>> origin/master

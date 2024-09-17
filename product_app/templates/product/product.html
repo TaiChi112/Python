@@ -1,0 +1,65 @@
+{% extends 'base.html'%}
+{% block title %}Product{% endblock %}
+{% block content %}
+<!-- component -->
+<section style="margin:0 50px 0 50px;" class="text-gray-700 body-font overflow-hidden bg-white">
+    <div style="max-width: 1200px;" class="container px-5 py-24 mx-auto">
+        <div class="flex">
+            <div class="image-container">
+                <img alt="{{product.name}}" class="object-cover w-full h-full rounded border border-gray-200"
+                    src="{{product.image_url}}">
+            </div>
+            <div style="margin-left: 16px;" class="lg:w-1/2 w-full lg:pl-10 lg:py-6  lg:mt-0">
+                <h2 class="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2>
+                <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{product.name}}</h1>
+
+                <p class="product-description">{{product.description}} Fam locavore kickstarter distillery. Mixtape
+                    chillwave
+                    tumeric sriracha
+                    taximy chia microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole raw denim forage brooklyn.
+                    Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra
+                    jean shorts keytar banjo tattooed umami cardigan.</p>
+
+                <div style="margin-top: 16px;" class="flex">
+                    <span class="title-font font-medium text-2xl text-gray-900">${{product.price}}</span>
+                    <button style="border-radius: 5px;margin-left:16px ;background: rgb(255, 75, 75);"
+                        class="flex ml-auto text-white border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">
+                        <a href="{% url 'add_to_cart' id=product.id %}">add</a>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    .image-container {
+        width: 300px;
+        height: 300px;
+    }
+
+    .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+    }
+
+    @media (max-width: 1030px) {
+        .image-container {
+            width: 300px;
+            height: 200px;
+        }
+        .desc-container{
+            font-size: 1rem;
+        }
+    }
+    @media (max-width: 1000px) {
+    .product-description {
+        font-size: 14px; 
+        line-height: 1.5;  
+    }
+}
+</style>
+{% endblock %}
