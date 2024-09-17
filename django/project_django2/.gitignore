@@ -1,0 +1,67 @@
+/node_modules
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.pyd
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Django
+*.log
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+
+# Environments
+.env
+*.env
+venv/
+env/
+.venv/
+.envrc
+venv/
+ENV/
+env.bak/
+env/
+.venv/
+venv/
+pipenv/
+Pipfile.lock
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.suo
+*.ntvs_analysis.dat
+*.ncb
+*.sw?
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+*.project
+*.settings/
+*.classpath
+*.cproject
+
+# OS specific
+.DS_Store
+Thumbs.db
+# Django
+*.log
+*.sqlite3
+media/
+staticfiles/
+
+*.exe
+venv

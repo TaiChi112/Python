@@ -1,0 +1,16 @@
+{% extends 'general_app/base.html' %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<h1>Products list</h1>
+<div style="display: flex; flex-wrap: wrap;">
+    {% for product in product_list %}
+    <a href="{{ product.id }}">
+        <img src="{{ product.image_url }}" alt="{{ product.name }}" style="width: 200px;height: 200px;object-fit: cover; margin: 16px; border: 1px solid black;">
+        <li> Name: {{ product.name }},Price ${{ product.price }}</li>
+    </a>
+    {% endfor %}
+</div style="display: flex;">
+<h2>End</h2>
+{% endblock %}
