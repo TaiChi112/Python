@@ -20,7 +20,7 @@ def products_view(request):
     
     context = {
         'products': products,
-        'form': form  # ส่งฟอร์มค้นหาผ่าน context
+        'form': form   
 }
     return render(request, 'product/products.html', context)
 
