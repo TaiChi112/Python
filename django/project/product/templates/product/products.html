@@ -1,0 +1,27 @@
+{% extends 'components/base.html' %}
+
+{% block title %}
+Product List
+{% endblock %}
+
+{% block content %}
+{% include 'components/nav.html' %}
+
+<h1>Product List</h1>
+<hr>
+{% for product in products %}
+<div class="product">
+    <h2><a href="{% url 'product' product.id %}">{{ product.name }}</a></h2>
+    <h4>{{ product.price }}</h4>
+    <p>{{ product.description }}</p>
+    {% if product.is_premium %}
+    <p>This is a premium product</p>
+    {% endif %}
+</div>
+<hr>
+{% empty %}
+<p>No products available</p>
+{% endfor %}
+
+{% include 'components/footer.html' %}
+{% endblock %}
