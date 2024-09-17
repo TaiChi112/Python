@@ -1,12 +1,18 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 /node_modules
 >>>>>>> origin/master
+=======
+>>>>>>> 6c50605f996cccfa435887c9c57df05a46f3ce44
 # Python
 *.py[cod]
 __pycache__/
 *.so
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 6c50605f996cccfa435887c9c57df05a46f3ce44
 *.egg
 *.egg-info/
 dist/
@@ -102,16 +108,22 @@ cover/
 *.pot
 
 # Django stuff:
+<<<<<<< HEAD
 =======
 
 # Django
 >>>>>>> origin/master
+=======
+>>>>>>> 6c50605f996cccfa435887c9c57df05a46f3ce44
 *.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 6c50605f996cccfa435887c9c57df05a46f3ce44
 # Flask stuff:
 instance/
 .webassets-cache
@@ -148,6 +160,7 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+<<<<<<< HEAD
 =======
 # Static files
 staticfiles/
@@ -190,3 +203,5 @@ htmlcov/
 .coverage
 .coverage.*
 >>>>>>> origin/master
+=======
+>>>>>>> 6c50605f996cccfa435887c9c57df05a46f3ce44
