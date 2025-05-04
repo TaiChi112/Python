@@ -1,0 +1,2 @@
+SPEED = 30
+DISTANCE = 50
